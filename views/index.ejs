@@ -27,11 +27,13 @@
     <script src="data/processed_data/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
     <script src="data/processed_data/statistics.js"></script> <!-- var = statistics-->
     <script src="data/processed_data/spa_results.js"></script> <!-- spa_results -->
-    
+
 
 </head>
 
 <body>
+    
+<a href="/da">link text</a>
 
     <script>
         console.log(keys)
@@ -50,6 +52,7 @@
             <div class="col-xl-10">
                 <div id="map"></div>
             </div>
+            
             <div class="col-2 container-fluid">
                 <!-- Dropdown menu, calculating SpaAutoCorr-->
                 <p>Spatial Auto Correaltion Visualizer</p>
@@ -62,16 +65,25 @@
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div id="checkbox_menu" class="container my-3"></div>
                 <!-- Chatbox -->
-                <!-- <div class="container position-absolute my-3 border overflow-auto" style="height:400px; width:300px">
-                    <div id="chatbox">
-                        <div class="position-absolute top-0 start-0"style="height: 300px; width:200px;" id="messages"></div>
-                        <div class=" container position-absolute bottom-0 end-0">
-                            <input type="text" id="userInput" placeholder="Type a message..." />
-                            <button type="button" class="btn btn-outline-primary my-1"
-                                onclick="sendMessage()">Send</button>
-                        </div>
-                    </div>
-                </div> -->
+                <div class="container">
+                    <input id="keyInput" type="text" placeholder="your OpenAi apiKey">
+                    <button type="button" class="btn btn-outline-primary my-1 p-1"
+                        onclick="confirmKey()">confirm</button>
+                </div>
+                <script>
+                    async function confirmKey() {
+                        const keyInput = document.getElementById("keyInput")
+                        const apiKey = keyInput.value
+                        if (!apiKey) {
+                            return
+                        }
+                        const response = await fetch("/apiKey", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ apiKey })
+                        });
+                    }
+                </script>
                 <div class="card bg-primary">
                     <div class="card-body">
                         Chat about your data
@@ -114,23 +126,22 @@
                 const messagesDiv = document.getElementById("messages");
                 const messageDiv = document.createElement("p");
                 const authorDiv = document.createElement("p")
-                
+
                 authorDiv.textContent = sender
 
                 messageDiv.textContent = text;
                 messageDiv.classList.add("message", sender);
-                if(sender == "user"){
-                    messageDiv.setAttribute("class","my-1 text-end")
-                    authorDiv.setAttribute("class","my-2 text-end fs-6")
-                    
+                if (sender == "user") {
+                    messageDiv.setAttribute("class", "my-1 text-end")
+                    authorDiv.setAttribute("class", "my-2 text-end fs-6")
+
                     console.log("user message")
                 }
-                if(sender == "assistant")
-                    {   
-                        messageDiv.setAttribute("class","my-1 text-start")
-                        authorDiv.setAttribute("class","my-2 text-start fs-6")
-                        console.log("assistant message")
-                    }
+                if (sender == "assistant") {
+                    messageDiv.setAttribute("class", "my-1 text-start")
+                    authorDiv.setAttribute("class", "my-2 text-start fs-6")
+                    console.log("assistant message")
+                }
                 messagesDiv.appendChild(authorDiv)
                 messagesDiv.appendChild(messageDiv);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
