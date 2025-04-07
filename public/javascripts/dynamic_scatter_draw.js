@@ -18,8 +18,7 @@ if (base_data != undefined) {
             if(scatter_keys.length >= 2){
                 let tuples = createDataTuple(scatter_dataset.fullData, scatter_keys)
                 createChart(tuples)
-
-
+                // createChart2(tuples)
             }
         })
     })
@@ -35,6 +34,7 @@ function radios_checked(all_radios) {
     console.log('checked radios: ', checked_keys)
     return checked_keys
 }
+
 
 ///takes scatterplot_dataset.fullData and active keys [] defined by radiobuttons
 function createDataTuple(obj,keys){
@@ -75,7 +75,12 @@ function createChart(datasetObj){
     console.log(datasetObj)
     const ids = datasetObj.ids
     const dataset = datasetObj.processed_data
-    ids.forEach(id =>{
+    const uniqueids =[]
+    document.getElementsByName("chartCanvas").forEach((element)=>{
+        uniqueids.push(element.id)
+    })
+    
+    uniqueids.forEach(id =>{
         var ctx = document.getElementById(id)
         const data = {
             datasets: [{
@@ -83,9 +88,6 @@ function createChart(datasetObj){
                 data: dataset[id].data
             }]
         }
-        //console.log(ctx)
-        
-        //console.log(data)
         var scatter = new Chart(ctx, {
             type: 'scatter',
             data: data,
@@ -96,3 +98,24 @@ function createChart(datasetObj){
         //console.log(scatter)
     })
 }
+// function createChart2(datasetObj){
+//     const ids = datasetObj.ids
+//     const dataset = datasetObj.processed_data
+//     ids.forEach(id =>{
+//         var ctx = document.getElementById(id)
+//         const data = {
+//             datasets: [{
+//                 label: dataset[id].label,
+//                 data: dataset[id].data
+//             }]
+//         }
+//         var scatter = new Chart(ctx, {
+//             type: 'scatter',
+//             data: data,
+//             options:{
+//                 responsive: true,
+//             }
+//         })
+//         //console.log(scatter)
+//     })
+// }

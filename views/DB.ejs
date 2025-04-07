@@ -36,6 +36,7 @@
         console.log(keys)
         console.log(base_data)
         console.log(scatter_dataset)
+        console.log(base_data_spaAutoCorr)
     </script>
 
     <!-- // my functions -->
@@ -44,17 +45,16 @@
     <script type='module' defer src='javascripts/dynamic_scatter_layout.js'></script>
     <script type='module' defer src='javascripts/dynamic_scatter_draw.js'></script>
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Dataset A</a>
+            <a class="navbar-brand" href="/DB">Dataset B</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="/DB">Dataset B</a>
+                    <a class="nav-link" aria-current="page" href="/">Dataset A</a>
                 </div>
             </div>
 
@@ -67,6 +67,7 @@
                 <button class="btn btn-outline-success" type="button" onclick="toggleChatComponent()">toggle
                     chat</button>
             </form>
+
         </div>
     </nav>
 
@@ -111,14 +112,12 @@
                             onclick="sendMessage()">Send</button>
                     </div>
                 </div>
+            
             </div>
         </div>
         <!-- unique scatter bottom view-->
         <div id="canvasBottomView" class="d-flex flex-row"></div>
     </div>
-
-
-    <!-- all scatterplots table -->
     <div class="container-fluid" style="visibility: hidden;">
         <table class="table" id="charts_table"></table>
     </div>

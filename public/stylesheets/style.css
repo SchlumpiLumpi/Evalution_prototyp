@@ -1,17 +1,38 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
 }
 
 a {
   color: #00B7FF;
 }
-
+#dashboard{
+  height: 90vh;
+}
 #map {
-  height:700px;
+  height:90vh;
+  
+  /* height:100vh */
 }
 #messages{
   overflow-y: auto;
   
   scrollbar-width: thin;
+}
+
+#canvasSideView{
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    height: 90vh;
+    visibility: collapse
+}
+#canvasBottomView{
+    /* height: 20vh; */
+    overflow-x:auto;
+    overflow-y:hidden;
+    visibility: hidden;
+}
+#toolset{
+  height: 90vh
 }

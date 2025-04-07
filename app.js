@@ -40,12 +40,12 @@ app.get("/",async (req,res)=>{
         // content: `You are helping generating insights for this reference data: ${referenceDataString}.
         //           You keep your answers short and well structured. If you provide additional information or hypothesizing about the dataset,
         //           at the end of your response add at least 2 and at most 3 reliable ressources of your claims`
-        content: 'You always reply with the response: A'
+        content: 'You always reply: A'
     })
         
     res.render("index")
 })
-app.get("/da", async (req,res) => {
+app.get("/DB", async (req,res) => {
     //clear instructions
     messages=[]
     //load reference data
@@ -57,9 +57,9 @@ app.get("/da", async (req,res) => {
         // content: `You are helping generating insights for this reference data: ${referenceDataString}.
         //           You keep your answers short and well structured. If you provide additional information or hypothesizing about the dataset,
         //           at the end of your response add at least 2 and at most 3 reliable ressources of your claims`
-        content: 'You always reply with the response: A'
+        content: 'You always reply: B'
     })
-    res.render("da")
+    res.render("DB")
 })
 
 
