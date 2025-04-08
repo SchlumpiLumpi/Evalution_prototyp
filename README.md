@@ -1,6 +1,6 @@
 Prototyp für das Experiment:
 
-starten der App
+>Starten der App:
  - >npm install 
  - >npm start
 
