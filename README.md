@@ -1,6 +1,6 @@
 Prototyp der Evaluierungs-Website:
 
->Starten der App:
+Installieren nötiger Pakete und Start der Anwendung:
  - >npm install 
  - >npm start
 
