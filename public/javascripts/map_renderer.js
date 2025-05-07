@@ -4,7 +4,8 @@
 ///https://stackoverflow.com/questions/55010528/how-to-listen-for-clicks-on-buttons-in-a-bootstrap-drop-down-menu-javascript
 Array.from(document.getElementsByName('spaAutoCorr_button')).forEach((element) => {
     element.addEventListener('click', (event) => {
-        draw_spatial_auto_correlation_results(base_data,spa_results, event.target.innerText);
+        // draw_spatial_auto_correlation_results(base_data,spa_results, event.target.innerText);
+        drawChoroplethMap(base_data, event.target.innerText, jenksBounds)
     });
 });
 
@@ -41,8 +42,114 @@ if (base_data != undefined) {
     }
     console.log("panning pos", pos)
     map.flyTo([pos[1], pos[0]], 5)
+
+
+
+
+
 }
 
+function drawChoroplethMap(base_data, key, jenksBounds) {
+
+    //clear map
+    map.eachLayer(layer => {
+        map.removeLayer(layer)
+    })
+    osm.addTo(map)
+    layerControl.remove()
+    layerControl = L.control.layers(baseMaps).addTo(map);
+    geoJSONFeatureGroup_base_data = L.geoJSON(base_data,).addTo(map)
+    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
+
+    //choropleth
+    const class1 = {
+        "fillColor": "#ffffd4",
+        "opacity": 1,
+        "fillOpacity": 1
+    }
+    const class2 = {
+        "fillColor": "#fed98e",
+        "opacity": 1,
+        "fillOpacity": 1
+    }
+    const class3 = {
+        "fillColor": "#fe9929",
+        "opacity": 1,
+        "fillOpacity": 1
+    }
+    const class4 = {
+        "fillColor": "#d95f0e",
+        "opacity": 1,
+        "fillOpacity": 1
+    }
+    const class5 = {
+        "fillColor": "#993404",
+        "opacity": 1,
+        "fillOpacity": 1
+    }
+    const choroLayer_1 = L.geoJSON(base_data, {
+        style: class1,
+        filter: function (feature) {
+            if (feature.properties[key] >= jenksBounds[key][0] && feature.properties[key] < jenksBounds[key][1]) return true
+        }
+    }).addTo(map)
+    const choroLayer_2 = L.geoJSON(base_data, {
+        style: class2,
+        filter: function (feature) {
+            if (feature.properties[key] >= jenksBounds[key][1] && feature.properties[key] < jenksBounds[key][2]) return true
+        }
+    }).addTo(map)
+    const choroLayer_3 = L.geoJSON(base_data, {
+        style: class3,
+        filter: function (feature) {
+            if (feature.properties[key] >= jenksBounds[key][2] && feature.properties[key] < jenksBounds[key][3]) return true
+        }
+    }).addTo(map)
+    const choroLayer_4 = L.geoJSON(base_data, {
+        style: class4,
+        filter: function (feature) {
+            if (feature.properties[key] >= jenksBounds[key][3] && feature.properties[key] < jenksBounds[key][4]) return true
+        }
+    }).addTo(map)
+    const choroLayer_5 = L.geoJSON(base_data, {
+        style: class5,
+        filter: function (feature) {
+            if (feature.properties[key] >= jenksBounds[key][4] && feature.properties[key] <= jenksBounds[key][5]) return true
+        }
+    }).addTo(map)
+
+    // console.log(popUpKeys)
+
+
+    const popUp_layer = L.geoJSON(base_data, {
+        style: {
+            "opacity": 0,
+            "fillOpacity": 0
+        },
+        onEachFeature: function (feature, layer) {
+
+          
+            
+            let popUpObject = []
+            for (var keys in feature.properties) {
+                if (feature.properties.hasOwnProperty(key)) {
+                    var content = keys + ": " + feature.properties[keys];
+                    popUpObject.push(content);
+                }
+            }
+            let popupString = popUpObject.join(" <br>")
+            
+            let popup = L.popup().setContent(popupString)
+            
+            layer.bindPopup(popup)
+        }
+    }).addTo(map)
+    layerControl.addOverlay(choroLayer_1, '1')
+    layerControl.addOverlay(choroLayer_2, '2')
+    layerControl.addOverlay(choroLayer_3, '3')
+    layerControl.addOverlay(choroLayer_4, '4')
+    layerControl.addOverlay(choroLayer_5, '5')
+}
 
 async function draw_spatial_auto_correlation_results(base_data, results_data, key) {
 

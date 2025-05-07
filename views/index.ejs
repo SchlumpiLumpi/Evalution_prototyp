@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Datensatz A</title>
     <!-- Bootstrap-->
     <link crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -21,11 +21,12 @@
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- processed data entries-->
-    <script src="data/processed_data/mortalityGeoJSON.js"></script> <!-- base_data-->
-    <script src="data/processed_data/keys.js"></script> <!-- var = keys-->
-    <script src="data/processed_data/keys_numerical.js"></script> <!-- var = keys_numerical-->
-    <script src="data/processed_data/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
-    <script src="data/processed_data/statistics.js"></script> <!-- var = statistics-->
+    <script src="data/processed_data/DataA/DA.js"></script> <!-- base_data-->
+    <script src="data/processed_data/DataA/keys.js"></script> <!-- var = keys-->
+    <script src="data/processed_data/DataA/keys_numerical.js"></script> <!-- var = keys_numerical-->
+    <script src="data/processed_data/DataA/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
+    <script src="data/processed_data/DataA/statistics.js"></script> <!-- var = statistics-->
+    <script src="data/processed_data/DataA/jenksBounds.js"></script>
     <script src="data/processed_data/spa_results.js"></script> <!-- spa_results -->
 
 
@@ -58,10 +59,10 @@
                 </div>
             </div>
 
-            <form class="d-flex mx-5">
+            <!-- <form class="d-flex mx-5">
                 <input id="keyInput" type="text" placeholder="your OpenAi apiKey" class="rounded mx-1">
                 <button type="button" class="btn btn-outline-primary my-1 p-1" onclick="confirmKey()">Confirm</button>
-            </form>
+            </form> -->
 
             <form class="d-flex">
                 <button class="btn btn-outline-success" type="button" onclick="toggleChatComponent()">toggle
@@ -72,20 +73,20 @@
 
 
     <div id="dashboard" class="container-fluid">
-        <div class="row my-2">
+        <div class="d-flex flex-row align-items-start">
             <!-- Unique Scatters Side View -->
-            <div id="canvasSideView" class="col-3 "></div>
+            <div id="canvasSideView"></div>
             <!-- Map -->
-            <div id="mapDiv" class="col-10">
+            <div id="mapDiv" style="flex-grow: 1;">
                 <div id="map"></div>
             </div>
 
-            <div id="toolset" class="col-2 container-fluid">
+            <div id="toolset" class="width: 200px;">
                 <!-- Dropdown menu, calculating SpaAutoCorr-->
                 <div class="dropdown">
                     <button class="btn dropdown-toggle btn-primary text-light text-center" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Spatial Auto Correlation
+                        Choropleth Map
                     </button>
                     <ul class="dropdown-menu" id="dropdown_menu"></ul>
                 </div>
@@ -106,10 +107,28 @@
                         </div>
                     </div>
                     <div id="chatbox" class="container border rounded">
-                        <div class="container-fluid" id="messages" style="height:200px"></div>
-                        <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>
+                        <div class="container-fluid" id="messages" style="height:300px">
+                            <div id="highlights" class="my-1 text-start" style="width:300px">
+                                <b>Windenergie ist in den meisten Landkreisen die dominante erneuerbare Energieform:</b>  <br>
+                                In einem Großteil der Regionen macht Windenergie mehr als 50 % <br>
+                                der erneuerbaren Energien aus – oft sogar über 70 %
+                                <br>
+                                <br>
+                                <b>Photovoltaikist regional unterschiedlich stark vertreten:</b> <br>
+                                In südlichen und besonders sonnenreichen Regionen ist der Anteil von PV höher <br>
+                                – in manchen Landkreisen übersteigt er 80 % der erneuerbaren Erzeugung.
+                                <br>
+                                <br>
+                                <b>Kaum Regionen mit ausgewogener Verteilung:</b>
+                                Nur sehr wenige Landkreise haben einen annähernd gleichen Anteil 
+                                von PV und Wind 
+                                – die meisten sind deutlich von einer der beiden Technologien geprägt.
+                            </div>
+                        </div>
+                        <!-- <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>
+
                         <button type="button" class="btn btn-outline-primary my-1 p-1"
-                            onclick="sendMessage()">Send</button>
+                            onclick="sendMessage()">Send</button>  -->
                     </div>
                 </div>
             </div>
@@ -118,13 +137,21 @@
         <div id="canvasBottomView" class="d-flex flex-row"></div>
     </div>
 
-
-    <!-- all scatterplots table -->
-    <div class="container-fluid" style="visibility: hidden;">
-        <table class="table" id="charts_table"></table>
-    </div>
-
-
+    <!-- canvas resizing -->
+    <script>
+        const canvasSideView = document.getElementById('canvasSideView')
+        let timeout
+        canvasSideView.addEventListener("mouseup", () => {
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                Chart.helpers.each(Chart.instances, function (chart) {
+                    if (chart.canvas.closest(canvasSideView.id)) {
+                        chart.resize()
+                    }
+                })
+            }, 200)
+        })
+    </script>
     <script>
         async function sendMessage() {
             const inputField = document.getElementById("userInput");

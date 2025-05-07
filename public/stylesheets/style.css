@@ -10,14 +10,17 @@ a {
 #dashboard{
   height: 90vh;
 }
+#mapDiv{
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 200px; /* prevent collapse */
+}
 #map {
   height:90vh;
-  
-  /* height:100vh */
 }
 #messages{
   overflow-y: auto;
-  
+  overflow-x:hidden;
   scrollbar-width: thin;
 }
 
@@ -25,7 +28,10 @@ a {
     overflow-y: auto; 
     overflow-x: hidden; 
     height: 90vh;
-    visibility: collapse
+    min-width: 250px;
+    max-width: 1000px;
+    display: none;
+    resize: horizontal;
 }
 #canvasBottomView{
     /* height: 20vh; */
@@ -36,3 +42,16 @@ a {
 #toolset{
   height: 90vh
 }
+
+.scatterplot{
+  transition: all .2s ease-in-out;
+  position: relative;
+  z-index: 1;
+
+}
+canvas{
+  width: 100% !important;
+  height:auto !important;
+  min-height: 25vh;
+}
+

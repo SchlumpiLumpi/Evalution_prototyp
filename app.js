@@ -62,7 +62,6 @@ app.get("/DB", async (req,res) => {
     res.render("DB")
 })
 
-
 //Chat Component
 app.post("/chat", async (req, res) => {
     // receive user input

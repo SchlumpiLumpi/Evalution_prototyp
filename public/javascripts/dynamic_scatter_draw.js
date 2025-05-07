@@ -7,8 +7,6 @@ class Data_Point{
     }
 }
 
-
-
 if (base_data != undefined) {
     let scatter_keys = []
     let all_radios = Array.from(document.getElementsByName('scatterplot_radio'))
@@ -82,6 +80,7 @@ function createChart(datasetObj){
     
     uniqueids.forEach(id =>{
         var ctx = document.getElementById(id)
+        // var ctx_big = document.getElementById(id+"_big")
         const data = {
             datasets: [{
                 label: dataset[id].label,
@@ -93,29 +92,9 @@ function createChart(datasetObj){
             data: data,
             options:{
                 responsive: true,
-            }
+                maintainAspectRatio: false,
+                devicePixelRatio: 1
+            },
         })
-        //console.log(scatter)
     })
 }
-// function createChart2(datasetObj){
-//     const ids = datasetObj.ids
-//     const dataset = datasetObj.processed_data
-//     ids.forEach(id =>{
-//         var ctx = document.getElementById(id)
-//         const data = {
-//             datasets: [{
-//                 label: dataset[id].label,
-//                 data: dataset[id].data
-//             }]
-//         }
-//         var scatter = new Chart(ctx, {
-//             type: 'scatter',
-//             data: data,
-//             options:{
-//                 responsive: true,
-//             }
-//         })
-//         //console.log(scatter)
-//     })
-// }

@@ -21,13 +21,13 @@
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- processed data entries-->
-    <script src="data/processed_data/mortalityGeoJSON.js"></script> <!-- base_data-->
-    <script src="data/processed_data/keys.js"></script> <!-- var = keys-->
-    <script src="data/processed_data/keys_numerical.js"></script> <!-- var = keys_numerical-->
-    <script src="data/processed_data/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
-    <script src="data/processed_data/statistics.js"></script> <!-- var = statistics-->
+    <script src="data/processed_data/DataB/DB.js"></script> <!-- base_data-->
+    <script src="data/processed_data/DataB/keys.js"></script> <!-- var = keys-->
+    <script src="data/processed_data/DataB/keys_numerical.js"></script> <!-- var = keys_numerical-->
+    <script src="data/processed_data/DataB/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
+    <script src="data/processed_data/DataB/statistics.js"></script> <!-- var = statistics-->
+    <script src="data/processed_data/DataB/jenksBounds.js"></script>
     <script src="data/processed_data/spa_results.js"></script> <!-- spa_results -->
-
 
 </head>
 
@@ -58,10 +58,10 @@
                 </div>
             </div>
 
-            <form class="d-flex mx-5">
+            <!-- <form class="d-flex mx-5">
                 <input id="keyInput" type="text" placeholder="your OpenAi apiKey" class="rounded mx-1">
                 <button type="button" class="btn btn-outline-primary my-1 p-1" onclick="confirmKey()">Confirm</button>
-            </form>
+            </form> -->
 
             <form class="d-flex">
                 <button class="btn btn-outline-success" type="button" onclick="toggleChatComponent()">toggle
@@ -73,19 +73,20 @@
 
 
     <div id="dashboard" class="container-fluid">
-        <div class="row my-2">
-            <div id="canvasSideView" class="col-3 "></div>
-            <div id="mapDiv" class="col-10">
+        <div class="d-flex flex-row align-items-start">
+            <!-- Unique Scatters Side View -->
+            <div id="canvasSideView"></div>
+            <!-- Map -->
+            <div id="mapDiv" style="flex-grow: 1;">
                 <div id="map"></div>
             </div>
 
-            <div id="toolset" class="col-2 container-fluid">
+            <div id="toolset" class="width: 200px;">
                 <!-- Dropdown menu, calculating SpaAutoCorr-->
-                
                 <div class="dropdown">
                     <button class="btn dropdown-toggle btn-primary text-light text-center" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Spatial Auto Correlation
+                        Choropleth Map
                     </button>
                     <ul class="dropdown-menu" id="dropdown_menu"></ul>
                 </div>
@@ -106,23 +107,46 @@
                         </div>
                     </div>
                     <div id="chatbox" class="container border rounded">
-                        <div class="container-fluid" id="messages" style="height:200px"></div>
-                        <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>
+                        <div class="container-fluid" id="messages" style="height:200px">
+                            <div id="highlights" class="my-1 text-start" style="width:300px">
+                                <b>Highlight:</b>  <br>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                <br>
+                                <br>
+                                <b>Highlight:</b> <br>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                <br>
+                                <br>
+                                <b>Highlight:</b>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                            </div>
+                        </div>
+                        <!-- <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>
                         <button type="button" class="btn btn-outline-primary my-1 p-1"
-                            onclick="sendMessage()">Send</button>
+                            onclick="sendMessage()">Send</button> -->
                     </div>
                 </div>
-            
             </div>
         </div>
         <!-- unique scatter bottom view-->
         <div id="canvasBottomView" class="d-flex flex-row"></div>
     </div>
-    <div class="container-fluid" style="visibility: hidden;">
-        <table class="table" id="charts_table"></table>
-    </div>
 
-
+    <!-- canvas resizing -->
+    <script>
+        const canvasSideView = document.getElementById('canvasSideView')
+        let timeout
+        canvasSideView.addEventListener("mouseup", () => {
+            clearTimeout(timeout)
+            timeout = setTimeout(()=>{
+                Chart.helpers.each(Chart.instances, function(chart){
+                    if(chart.canvas.closest(canvasSideView.id)){
+                        chart.resize()
+                    }
+                })
+            },200)
+        })
+    </script>
     <script>
         async function sendMessage() {
             const inputField = document.getElementById("userInput");
