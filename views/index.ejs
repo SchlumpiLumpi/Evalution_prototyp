@@ -78,18 +78,27 @@
             <div id="canvasSideView"></div>
             <!-- Map -->
             <div id="mapDiv" style="flex-grow: 1;">
-                <div id="map"></div>
+                <div id="map">
+                    
+                </div>
             </div>
 
             <div id="toolset">
                 <!-- Dropdown menu, calculating SpaAutoCorr-->
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle btn-primary text-light text-center" type="button"
+                <!-- <div class="dropdown">
+                    <button class="btn dropdown-toggle btn-primary text-light text-center" style="width:100%" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Choropleth Map
                     </button>
                     <ul class="dropdown-menu" id="dropdown_menu"></ul>
+                </div> -->
+                <!-- Radiobuttons, draw choroplethmap-->
+                <div class="card bg-primary">
+                    <div class="card-body card-body text-light text-center">
+                        Choropleth Map
+                    </div>
                 </div>
+                <div id="checkbox_menu_choro" class="container my-3"></div>
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div class="card bg-primary my-3">
                     <div class="card-body card-body text-light text-center">
@@ -110,13 +119,13 @@
                         <div class="container-fluid" id="messages" style="height:300px">
                             <div id="highlights" class="my-1 text-start" style="width:250px">
                                 <b>Windenergie ist in den meisten Landkreisen die dominante erneuerbare Energieform:</b>  <br>
-                                In einem Großteil der Regionen macht Windenergie mehr als 50 % <br>
-                                der erneuerbaren Energien aus – oft sogar über 70 %
+                                In einem Großteil der Regionen macht Windenergie mehr als 50% <br>
+                                der erneuerbaren Energien aus – oft sogar über 70%
                                 <br>
                                 <br>
                                 <b>Photovoltaik ist regional unterschiedlich stark vertreten:</b> <br>
                                 In südlichen und besonders sonnenreichen Regionen ist der Anteil von PV höher <br>
-                                – in manchen Landkreisen übersteigt er 80 % der erneuerbaren Erzeugung.
+                                – in manchen Landkreisen übersteigt er 80% der erneuerbaren Erzeugung.
                                 <br>
                                 <br>
                                 <b>Kaum Regionen mit ausgewogener Verteilung:</b>

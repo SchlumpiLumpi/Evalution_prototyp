@@ -5,33 +5,56 @@
 Array.from(document.getElementsByName('spaAutoCorr_button')).forEach((element) => {
     element.addEventListener('click', (event) => {
         // draw_spatial_auto_correlation_results(base_data,spa_results, event.target.innerText);
-        drawChoroplethMap(base_data, event.target.innerText, jenksBounds)
+        let key = event.target.innerText
+        updateMap()
+        updateLegend(key, jenksBounds)
+        drawChoroplethMap(base_data, key, jenksBounds)
     });
 });
+Array.from(document.getElementsByName('choro_radio')).forEach((element =>{
+    element.addEventListener('click', (event)=>{
+        let key = event.target.value
+        updateMap()
+        updateLegend(key, jenksBounds)
+        drawChoroplethMap(base_data, key, jenksBounds)
 
-console.log("create map...")
+    })
+}))
+// _______________________________________________________________
 // instanciate map
+console.log("draw base-map...")
 var map = L.map('map').setView([51, 12], 3)
-
 //Baselayers
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 var baseMaps = {
     "OSM": osm,
 }
+//----------------------------------------------------------------
+//________________________________________________________
 //here an layerControl is added to the map
 var layerControl = L.control.layers(baseMaps).addTo(map);
+//--------------------------------------------------------
+
+//________________________________________________________
+//legend
+let legend = document.createElement("div")
+legend.id = "legend"
+legend.role = "button"
+legend.innerHTML = "Legende"
+mapDiv = document.getElementById("map")
+mapDiv.appendChild(legend)
+//-------------------------------------------------------
+let popUp_layer
+let geoJSONFeatureGroup_base_data
 
 if (base_data != undefined) {
     //add Data to map
     console.log(base_data.features[0].geometry)
-
-    var geoJSONFeatureGroup_base_data = L.geoJSON(base_data).addTo(map)
+    geoJSONFeatureGroup_base_data = L.geoJSON(base_data).addTo(map)
     layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
-
     let referenceFeature = base_data.features[0]
     let pos = []
     if (referenceFeature.geometry.type == "Polygon") {
@@ -42,26 +65,100 @@ if (base_data != undefined) {
     }
     console.log("panning pos", pos)
     map.flyTo([pos[1], pos[0]], 5)
+    popUp_layer = L.geoJSON(base_data, {
+        style: {
+            "opacity": 0,
+            "fillOpacity": 0
+        },
+        onEachFeature: function (feature, layer) {
+            let popUpObject = []
+            for (var keys in feature.properties) {
+                // if (feature.properties.hasOwnProperty(key)) {
+                var content = keys + ": " + feature.properties[keys];
+                popUpObject.push(content);
+                // }
+            }
+            let popupString = popUpObject.join(" <br>")
 
+            let popup = L.popup().setContent(popupString)
 
+            layer.bindPopup(popup)
+        }
+    }).addTo(map)
 
-
-
+    map.on("overlayadd", (event) => {
+        popUp_layer.bringToFront();
+        geoJSONFeatureGroup_base_data.bringToBack()
+    });
+    map.on("overlayremove", (event) => {
+        popUp_layer.bringToFront()
+        geoJSONFeatureGroup_base_data.bringToBack()
+    })
 }
 
-function drawChoroplethMap(base_data, key, jenksBounds) {
-
+function updateMap() {
     //clear map
     map.eachLayer(layer => {
         map.removeLayer(layer)
     })
     osm.addTo(map)
+    geoJSONFeatureGroup_base_data.addTo(map)
+    popUp_layer.addTo(map)
     layerControl.remove()
-    layerControl = L.control.layers(baseMaps).addTo(map);
-    geoJSONFeatureGroup_base_data = L.geoJSON(base_data,).addTo(map)
-    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
 
-    //choropleth
+    layerControl = L.control.layers(baseMaps).addTo(map);
+    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
+    // map.on("overlayadd", function (event) {
+    //     popUp_layer.bringToFront();
+    // });
+    popUp_layer.bringToFront();
+}
+function updateLegend(key, jenksBounds) {
+    //generate entries
+    let entries = []
+
+    for (let i = 1; i < jenksBounds[key].length; i++) {
+        let entry = `${Math.round((jenksBounds[key][i - 1]) * 100) / 100} - ${Math.round((jenksBounds[key][i]) * 100) / 100}`
+        entries.push(entry)
+    }
+    let legend = document.getElementById("legend")
+    legend.innerHTML = ""
+    let legend_content =
+        `<h6> Legende [${key}] </h6>
+    <span style="color:#993404">&#9632  </span><span>${entries[4]}</span><br>
+    <span style="color:#d95f0e">&#9632  </span><span>${entries[3]}</span><br>
+    <span style="color:#fe9929">&#9632  </span><span>${entries[2]}</span><br>
+    <span style="color:#fed98e">&#9632  </span><span>${entries[1]}</span><br>
+    <span style="color:#ffffd4">&#9632  </span><span>${entries[0]}</span><br>
+    `
+    legend.innerHTML = legend_content
+
+    let displayStatus = 1
+    //toggle legend
+    legend.addEventListener('click', (event) => {
+        if (displayStatus == 1) {
+            legend.innerHTML = `<h6> Legende [${key}] </h6>`
+            displayStatus = 0
+            return
+        }
+        else {
+            legend.innerHTML = legend_content
+            displayStatus = 1
+            return
+        }
+    })
+    //highlight on hover
+    legend.addEventListener("mouseover", (event) => {
+        legend.style['background'] = "#f9f9f9"
+    })
+    legend.addEventListener("mouseleave", (event) => {
+        legend.style['background'] = "white"
+    })
+
+
+}
+function drawChoroplethMap(base_data, key, jenksBounds) {
+    //classes
     const class1 = {
         "fillColor": "#ffffd4",
         "opacity": 1,
@@ -118,41 +215,16 @@ function drawChoroplethMap(base_data, key, jenksBounds) {
         }
     }).addTo(map)
 
-    // console.log(popUpKeys)
-
-
-    const popUp_layer = L.geoJSON(base_data, {
-        style: {
-            "opacity": 0,
-            "fillOpacity": 0
-        },
-        onEachFeature: function (feature, layer) {
-
-          
-            
-            let popUpObject = []
-            for (var keys in feature.properties) {
-                if (feature.properties.hasOwnProperty(key)) {
-                    var content = keys + ": " + feature.properties[keys];
-                    popUpObject.push(content);
-                }
-            }
-            let popupString = popUpObject.join(" <br>")
-            
-            let popup = L.popup().setContent(popupString)
-            
-            layer.bindPopup(popup)
-        }
-    }).addTo(map)
     layerControl.addOverlay(choroLayer_1, '1')
     layerControl.addOverlay(choroLayer_2, '2')
     layerControl.addOverlay(choroLayer_3, '3')
     layerControl.addOverlay(choroLayer_4, '4')
     layerControl.addOverlay(choroLayer_5, '5')
+
+    popUp_layer.bringToFront()
 }
 
 async function draw_spatial_auto_correlation_results(base_data, results_data, key) {
-
     //clear map
     map.eachLayer(layer => {
         map.removeLayer(layer)
@@ -162,9 +234,6 @@ async function draw_spatial_auto_correlation_results(base_data, results_data, ke
     layerControl = L.control.layers(baseMaps).addTo(map);
     geoJSONFeatureGroup_base_data = L.geoJSON(base_data).addTo(map)
     layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
-
-
-
     //append spatial_autocorrelatio_results to base_data
     const results = results_data[key]
     if (results != undefined) {

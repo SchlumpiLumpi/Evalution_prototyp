@@ -46,7 +46,12 @@ a {
 .scatterplot{
   transition: all .2s ease-in-out;
   position: relative;
-  z-index: 1;
+  z-index: 100;
+  margin-top: 5px;
+  margin-bottom:2px;
+  margin-right:3px;
+  margin-left:1px;
+  
 
 }
 canvas{
@@ -55,3 +60,16 @@ canvas{
   min-height: 25vh;
 }
 
+#legend{
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  margin-bottom: 30px;
+  margin-left:10px;
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px 10px;
+  
+}

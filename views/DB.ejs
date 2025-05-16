@@ -83,13 +83,20 @@
 
             <div id="toolset" class="width: 200px;">
                 <!-- Dropdown menu, calculating SpaAutoCorr-->
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button class="btn dropdown-toggle btn-primary text-light text-center" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Choropleth Map
                     </button>
                     <ul class="dropdown-menu" id="dropdown_menu"></ul>
+                </div> -->
+                <!-- Radiobuttons, draw choroplethmap-->
+                <div class="card bg-primary">
+                    <div class="card-body card-body text-light text-center">
+                        Choropleth Map
+                    </div>
                 </div>
+                <div id="checkbox_menu_choro" class="container my-3"></div>
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div class="card bg-primary my-3">
                     <div class="card-body card-body text-light text-center">
@@ -107,18 +114,28 @@
                         </div>
                     </div>
                     <div id="chatbox" class="container border rounded">
-                        <div class="container-fluid" id="messages" style="height:200px">
+                        <div class="container-fluid" id="messages" style="height:300px">
                             <div id="highlights" class="my-1 text-start" style="width:250px">
-                                <b>Highlight:</b>  <br>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                <b>Die höchsten Emissionen konzentrieren sich auf wenige Landkreise mit sehr großer
+                                    Fläche:</b> <br>
+                                Die Top-Emittenten weisen sowohl hohe
+                                CO₂-Werte als auch hohe Vegetationsanteile und niedrige Verkehrsflächenanteile auf. Dies
+                                legt nahe, dass dort Fläche, Bevölkerung oder Industriepräsenz die Emissionen treiben –
+                                nicht die Verkehrsinfrastruktur selbst.
                                 <br>
                                 <br>
-                                <b>Highlight:</b> <br>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                <b>Höhere Verkehrsflächenanteile korrelieren stark negativ mit Vegetationsanteilen:</b>
+                                <br>
+                                Die Korrelation zwischen Verkehrsflächenanteil und Vegetationsanteil weist auf einen
+                                sehr starken negativen Zusammenhang hin. Je mehr Fläche für Verkehr
+                                verwendet wird, desto weniger Vegetation ist vorhanden – und umgekehrt.
                                 <br>
                                 <br>
-                                <b>Highlight:</b>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                <b>CO₂-Emissionen streuen stark zwischen den Landkreisen:</b>
+                                Die Emissionen reichen von ca. 195.000 bis über 2,1 Milliarden Tonnen CO₂e, mit einem
+                                Durchschnitt von 160 Millionen. Der hohe Standardabweichungswert (~287 Mio.)
+                                unterstreicht die große Bandbreite und deutet auf strukturelle Unterschiede zwischen den
+                                Regionen hin.
                             </div>
                         </div>
                         <!-- <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>
@@ -138,13 +155,13 @@
         let timeout
         canvasSideView.addEventListener("mouseup", () => {
             clearTimeout(timeout)
-            timeout = setTimeout(()=>{
-                Chart.helpers.each(Chart.instances, function(chart){
-                    if(chart.canvas.closest(canvasSideView.id)){
+            timeout = setTimeout(() => {
+                Chart.helpers.each(Chart.instances, function (chart) {
+                    if (chart.canvas.closest(canvasSideView.id)) {
                         chart.resize()
                     }
                 })
-            },200)
+            }, 200)
         })
     </script>
     <script>
