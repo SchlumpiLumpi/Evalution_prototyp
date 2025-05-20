@@ -54,7 +54,7 @@ if (base_data != undefined) {
     //add Data to map
     console.log(base_data.features[0].geometry)
     geoJSONFeatureGroup_base_data = L.geoJSON(base_data).addTo(map)
-    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
+    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "base data")
     let referenceFeature = base_data.features[0]
     let pos = []
     if (referenceFeature.geometry.type == "Polygon") {
@@ -107,7 +107,7 @@ function updateMap() {
     layerControl.remove()
 
     layerControl = L.control.layers(baseMaps).addTo(map);
-    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
+    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "base data")
     // map.on("overlayadd", function (event) {
     //     popUp_layer.bringToFront();
     // });
@@ -125,11 +125,11 @@ function updateLegend(key, jenksBounds) {
     legend.innerHTML = ""
     let legend_content =
         `<h6> Legende [${key}] </h6>
-    <span style="color:#993404">&#9632  </span><span>${entries[4]}</span><br>
-    <span style="color:#d95f0e">&#9632  </span><span>${entries[3]}</span><br>
-    <span style="color:#fe9929">&#9632  </span><span>${entries[2]}</span><br>
-    <span style="color:#fed98e">&#9632  </span><span>${entries[1]}</span><br>
-    <span style="color:#ffffd4">&#9632  </span><span>${entries[0]}</span><br>
+    <span style="color:#993404">&#9632  </span><span>5: ${entries[4]}</span><br>
+    <span style="color:#d95f0e">&#9632  </span><span>4: ${entries[3]}</span><br>
+    <span style="color:#fe9929">&#9632  </span><span>3: ${entries[2]}</span><br>
+    <span style="color:#fed98e">&#9632  </span><span>2: ${entries[1]}</span><br>
+    <span style="color:#ffffd4">&#9632  </span><span>1: ${entries[0]}</span><br>
     `
     legend.innerHTML = legend_content
 
@@ -233,7 +233,7 @@ async function draw_spatial_auto_correlation_results(base_data, results_data, ke
     layerControl.remove()
     layerControl = L.control.layers(baseMaps).addTo(map);
     geoJSONFeatureGroup_base_data = L.geoJSON(base_data).addTo(map)
-    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "filename")
+    layerControl.addOverlay(geoJSONFeatureGroup_base_data, "base data")
     //append spatial_autocorrelatio_results to base_data
     const results = results_data[key]
     if (results != undefined) {

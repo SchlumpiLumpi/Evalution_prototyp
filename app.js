@@ -47,21 +47,23 @@ app.get("/",async (req,res)=>{
 })
 app.get("/DB", async (req,res) => {
     //clear instructions
-    messages=[]
+    // messages=[]
     //load reference data
-    const referenceData = await getReferenceData("public/data/referenceData/refB.json")
-    const referenceDataString = JSON.stringify(referenceData) 
+    // const referenceData = await getReferenceData("public/data/referenceData/refB.json")
+    // const referenceDataString = JSON.stringify(referenceData) 
     //set instructions
-    messages.push({
-        role: "system",
-        // content: `You are helping generating insights for this reference data: ${referenceDataString}.
-        //           You keep your answers short and well structured. If you provide additional information or hypothesizing about the dataset,
-        //           at the end of your response add at least 2 and at most 3 reliable ressources of your claims`
-        content: 'You always reply: B'
-    })
+    // messages.push({
+    //     role: "system",
+    //     // content: `You are helping generating insights for this reference data: ${referenceDataString}.
+    //     //           You keep your answers short and well structured. If you provide additional information or hypothesizing about the dataset,
+    //     //           at the end of your response add at least 2 and at most 3 reliable ressources of your claims`
+    //     content: 'You always reply: B'
+    // })
     res.render("DB")
 })
-
+app.get("/demo", async (req,res)=>{
+    res.render("demo")
+})
 //Chat Component
 app.post("/chat", async (req, res) => {
     // receive user input

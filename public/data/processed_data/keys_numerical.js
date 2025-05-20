@@ -1,1 +1,0 @@
-const keys_numerical = ['deaths','population' ,'crude_rate','age_adjusted_rate']

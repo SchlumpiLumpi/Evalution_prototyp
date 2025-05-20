@@ -27,7 +27,7 @@
     <script src="data/processed_data/DataA/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
     <script src="data/processed_data/DataA/statistics.js"></script> <!-- var = statistics-->
     <script src="data/processed_data/DataA/jenksBounds.js"></script>
-    <script src="data/processed_data/spa_results.js"></script> <!-- spa_results -->
+    
 
 
 </head>
@@ -57,8 +57,10 @@
                 <div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="/DB">Dataset B</a>
                 </div>
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/demo">Demo</a>
+                </div>
             </div>
-
             <!-- <form class="d-flex mx-5">
                 <input id="keyInput" type="text" placeholder="your OpenAi apiKey" class="rounded mx-1">
                 <button type="button" class="btn btn-outline-primary my-1 p-1" onclick="confirmKey()">Confirm</button>
@@ -94,14 +96,14 @@
                 </div> -->
                 <!-- Radiobuttons, draw choroplethmap-->
                 <div class="card bg-primary">
-                    <div class="card-body card-body text-light text-center">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Choose one of the Attributes to visualize on map">
                         Choropleth Map
                     </div>
                 </div>
                 <div id="checkbox_menu_choro" class="container my-3"></div>
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div class="card bg-primary my-3">
-                    <div class="card-body card-body text-light text-center">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Select two or more Attributes to generate scatterplots">
                         Scatterplot
                     </div>
                 </div>
