@@ -28,7 +28,7 @@ a {
     overflow-y: auto; 
     overflow-x: hidden; 
     height: 90vh;
-    min-width: 250px;
+    min-width: 300px;
     max-width: 1000px;
     display: none;
     resize: horizontal;

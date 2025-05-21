@@ -1,7 +1,7 @@
 const keys = [
   "RS",
   "GEN",
-  "CO2e_per_RS",
-  "veg_percent",
-  "traffic_percent"
+  "Ausstoß_CO2e[t]",
+  "Vegetationsflächen[%]",
+  "Verkehrsfläche[%]"
 ]

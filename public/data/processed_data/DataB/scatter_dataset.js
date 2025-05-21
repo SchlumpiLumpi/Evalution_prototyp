@@ -1,6 +1,6 @@
 const scatter_dataset = {
   "fullData": {
-    "CO2e_per_RS": [
+    "Ausstoß_CO2e[t]": [
       598525.613,
       1449621.849,
       1704380.234,
@@ -432,7 +432,7 @@ const scatter_dataset = {
       569724682.1,
       1423426129
     ],
-    "veg_percent": [
+    "Vegetationsflächen[%]": [
       0.320994183,
       0.322798146,
       0.483776087,
@@ -864,7 +864,7 @@ const scatter_dataset = {
       0.858676157,
       0.855123281
     ],
-    "traffic_percent": [
+    "Verkehrsfläche[%]": [
       0.138551031,
       0.139233038,
       0.093188291,

@@ -1,6 +1,6 @@
 const scatter_dataset = {
   "fullData": {
-    "CO2e_per_RS": [
+    "Ausstoß_CO2e[t]": [
       598525.613,
       1449621.849,
       1704380.234,
@@ -432,7 +432,7 @@ const scatter_dataset = {
       569724682.1,
       1423426129
     ],
-    "pv_percent": [
+    "Photovoltaik_Leistung[%]": [
       0.267864573,
       0.975334818,
       0.565770878,
@@ -864,7 +864,7 @@ const scatter_dataset = {
       0.41417318,
       0.447057022
     ],
-    "wind_on_percent": [
+    "Landwindkraft_Leistung[%]": [
       0.724042204,
       0.002506624,
       0.248941717,

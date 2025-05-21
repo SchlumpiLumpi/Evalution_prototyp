@@ -43,8 +43,8 @@ var layerControl = L.control.layers(baseMaps).addTo(map);
 let legend = document.createElement("div")
 legend.id = "legend"
 legend.role = "button"
-legend.innerHTML = "Legende"
-mapDiv = document.getElementById("map")
+legend.innerHTML = "<h6> Legende </h6>"
+const mapDiv = document.getElementById("map")
 mapDiv.appendChild(legend)
 //-------------------------------------------------------
 let popUp_layer
@@ -124,7 +124,7 @@ function updateLegend(key, jenksBounds) {
     let legend = document.getElementById("legend")
     legend.innerHTML = ""
     let legend_content =
-        `<h6> Legende [${key}] </h6>
+        `<h6> ${key} </h6>
     <span style="color:#993404">&#9632  </span><span>5: ${entries[4]}</span><br>
     <span style="color:#d95f0e">&#9632  </span><span>4: ${entries[3]}</span><br>
     <span style="color:#fe9929">&#9632  </span><span>3: ${entries[2]}</span><br>
@@ -137,7 +137,7 @@ function updateLegend(key, jenksBounds) {
     //toggle legend
     legend.addEventListener('click', (event) => {
         if (displayStatus == 1) {
-            legend.innerHTML = `<h6> Legende [${key}] </h6>`
+            legend.innerHTML = `<h6> Legende </h6>`
             displayStatus = 0
             return
         }
