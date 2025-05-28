@@ -23,7 +23,7 @@ Array.from(document.getElementsByName('choro_radio')).forEach((element =>{
 // _______________________________________________________________
 // instanciate map
 console.log("draw base-map...")
-var map = L.map('map').setView([51, 12], 3)
+window.map = L.map('map').setView([51, 12], 3)
 //Baselayers
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,

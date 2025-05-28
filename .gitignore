@@ -1,1 +1,5 @@
 /node_modules
+/public/data/processed_data/DataA/old
+/public/data/processed_data/DataB/old
+/public/data/processed_data/DataB/lessVeg
+/public/data/processed_data/DataB/allVeg

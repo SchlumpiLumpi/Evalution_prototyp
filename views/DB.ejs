@@ -20,6 +20,8 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin></script>
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js "></script>
+
     <!-- processed data entries-->
     <script src="data/processed_data/DataB/DB.js"></script> <!-- base_data-->
     <script src="data/processed_data/DataB/keys.js"></script> <!-- var = keys-->
@@ -36,14 +38,15 @@
         console.log(keys)
         console.log(base_data)
         console.log(scatter_dataset)
-        console.log(base_data_spaAutoCorr)
+        // console.log(base_data_spaAutoCorr)
     </script>
 
     <!-- // my functions -->
     <script type='module' defer src='javascripts/create_UI.js'></script>
     <script type='module' defer src='javascripts/map_renderer.js'></script>
     <script type='module' defer src='javascripts/dynamic_scatter_layout.js'></script>
-    <script type='module' defer src='javascripts/dynamic_scatter_draw.js'></script>
+    <!-- <script type='module' defer src='javascripts/dynamic_scatter_draw.js'></script> -->
+    <script type='module' defer src='javascripts/dynamic_scatter_draw_new.js'></script>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">

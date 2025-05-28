@@ -1,4 +1,4 @@
-const keys = [
+keys = [
   "RS",
   "GEN",
   "Ausstoß_CO2e[t]",
