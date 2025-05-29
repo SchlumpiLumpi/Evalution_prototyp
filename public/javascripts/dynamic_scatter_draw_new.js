@@ -14,7 +14,32 @@ if (base_data != undefined) {
         })
     })
 }
+function get_panningPosition(coors) {
+    let n = coors.length
+    // get 4 equal apart positions and their mean 
+    //start with first coor
+    let positionsLat = [coors[0][0]]
+    let positionsLon = [coors[0][1]]
+    // console.log(positionsLat, positionsLon)
+    let index = Math.floor(n / 4)
 
+    for (let i = 1; i <= 2; i++) {
+        positionsLat.push(coors[index][0])
+        positionsLon.push(coors[index][1])
+        index += index
+    }
+    positionsLat.push(coors[n - 1][0])
+
+    positionsLon.push(coors[n - 1][1])
+    //calculate mean of coordinates
+    let initVal = 0
+    let sumLat = positionsLat.reduce((accumalator, currentValue) => accumalator + currentValue, initVal)
+    let meanLat = sumLat / positionsLat.length
+    let sumLon = positionsLon.reduce((accumalator, currentValue) => accumalator + currentValue, initVal)
+    let meanLon = sumLon / positionsLon.length
+    let pan2pos = [meanLat, meanLon]
+    return pan2pos
+}
 function radios_checked(all_radios) {
     let checked_keys = []
     all_radios.forEach(radio => {
@@ -81,7 +106,7 @@ function createChart(datasetObj) {
             }]
         }
         //double click
-        function doubleClick(click2){
+        function doubleClick(click2) {
             console.log("double clicked")
             scatter.resetZoom()
         }
@@ -138,21 +163,21 @@ function createChart(datasetObj) {
                             if (identifier == base_data.features[i].properties.RS) {
                                 // get a position value from feature
                                 let referenceFeature = base_data.features[i]
-                                let pos = []
+                                let pos 
                                 if (referenceFeature.geometry.type == "Polygon") {
-                                    pos = referenceFeature.geometry.coordinates[0][0]
+                                    pos = get_panningPosition(referenceFeature.geometry.coordinates[0])
                                 }
                                 if (referenceFeature.geometry.type == "MultiPolygon") {
-                                    pos = referenceFeature.geometry.coordinates[0][0][0]
+                                    pos = get_panningPosition(referenceFeature.geometry.coordinates[0][0])
                                 }
 
-                                window.map.flyTo([pos[1], pos[0]], 8)
+                                window.map.flyTo([pos[1], pos[0]], 10)
                                 return
                             }
                         }
                     }
-                    catch{
-                        return
+                    catch (error) {
+                        console.log(error)
                     }
                 },
 

@@ -1,17 +1,17 @@
 let statistics = {
-  "Ausstoß_CO2e[t]": {
-    "min": 188798,
-    "max": 99905113,
-    "mean": 4586552.465116279
+  "Ausstoß_CO2e[kt]": {
+    "min": 188.798,
+    "max": 99905.113,
+    "mean": 4586.552465116282
   },
   "Photovoltaik_Leistung[%]": {
-    "min": 0.075,
-    "max": 1,
-    "mean": 0.5667348837209296
+    "min": 7.5,
+    "max": 100,
+    "mean": 56.673488372093004
   },
   "Landwindkraft_Leistung[%]": {
     "min": 0,
-    "max": 0.877,
-    "mean": 0.31150000000000017
+    "max": 87.7,
+    "mean": 31.149999999999977
   }
 }
