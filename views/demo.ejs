@@ -27,7 +27,7 @@
     <script src="data/processed_data/demo/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
     <script src="data/processed_data/demo/statistics.js"></script> <!-- var = statistics-->
     <script src="data/processed_data/demo/jenksBounds.js"></script>
-    
+
 
 </head>
 
@@ -43,7 +43,7 @@
     <script type='module' defer src='javascripts/create_UI.js'></script>
     <script type='module' defer src='javascripts/map_renderer.js'></script>
     <script type='module' defer src='javascripts/dynamic_scatter_layout.js'></script>
-    <script type='module' defer src='javascripts/dynamic_scatter_draw.js'></script>
+    <script type='module' defer src='javascripts/dynamic_scatter_draw_new.js'></script>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -95,14 +95,16 @@
                 </div> -->
                 <!-- Radiobuttons, draw choroplethmap-->
                 <div class="card bg-primary">
-                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Choose one of the Attributes to visualize on map">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip"
+                        data-placement="bottom" title="Choose one of the Attributes to visualize on map">
                         Choropleth Map
                     </div>
                 </div>
                 <div id="checkbox_menu_choro" class="container my-3"></div>
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div class="card bg-primary my-3">
-                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Select two or more Attributes to generate scatterplots">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip"
+                        data-placement="bottom" title="Select two or more Attributes to generate scatterplots">
                         Scatterplot
                     </div>
                 </div>
@@ -119,26 +121,23 @@
                     <div id="chatbox" class="container border rounded">
                         <div class="container-fluid" id="messages" style="height:300px">
                             <div id="highlights" class="my-1 text-start" style="width:250px">
-                                <b>Die höchsten Emissionen konzentrieren sich auf wenige Landkreise mit sehr großer
-                                    Fläche:</b> <br>
-                                Die Top-Emittenten weisen sowohl hohe
-                                CO₂-Werte als auch hohe Vegetationsanteile und niedrige Verkehrsflächenanteile auf. Dies
-                                legt nahe, dass dort Fläche, Bevölkerung oder Industriepräsenz die Emissionen treiben –
-                                nicht die Verkehrsinfrastruktur selbst.
+                                <b>Geografische Cluster möglich:</b> <br>
+                                Mehrere Bezirke mit hoher altersbereinigter Rate (z.B.
+                                >200) könnten geografisch beieinander liegen, was auf regionale Gesundheitsprobleme oder
+                                soziale Faktoren hindeuten könnte
                                 <br>
                                 <br>
-                                <b>Höhere Verkehrsflächenanteile korrelieren stark negativ mit Vegetationsanteilen:</b>
+                                <b>Bevölkerungszahl und Todesfälle:</b>
                                 <br>
-                                Die Korrelation zwischen Verkehrsflächenanteil und Vegetationsanteil weist auf einen
-                                sehr starken negativen Zusammenhang hin. Je mehr Fläche für Verkehr
-                                verwendet wird, desto weniger Vegetation ist vorhanden – und umgekehrt.
+                                Es besteht ein klarer Zusammenhang zwischen
+                                Bevölkerungszahl und der absoluten Anzahl an Todesfällen. Bezirke mit großer Bevölkerung
+                                (z.B. Harris mit 4.5 Mio. Einwohnern) verzeichnen auch hohe Todeszahlen (z.B. 54.907).
                                 <br>
                                 <br>
-                                <b>CO₂-Emissionen streuen stark zwischen den Landkreisen:</b>
-                                Die Emissionen reichen von ca. 195.000 bis über 2,1 Milliarden Tonnen CO₂e, mit einem
-                                Durchschnitt von 160 Millionen. Der hohe Standardabweichungswert (~287 Mio.)
-                                unterstreicht die große Bandbreite und deutet auf strukturelle Unterschiede zwischen den
-                                Regionen hin.
+                                <b>Crude Rate vs. Age-Adjusted Rate:</b>
+                                In vielen Fällen ist die altersbereinigte Sterberate
+                                geringer als die rohe Sterberate – z.B. bei Travis County (Rohrate 134, altersbereinigt
+                                94). Das deutet auf eine vergleichsweise jüngere Bevölkerung hin.
                             </div>
                         </div>
                         <!-- <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>

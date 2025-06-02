@@ -20,7 +20,8 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin></script>
     <!--Chart.js-->
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script defer src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js "></script>
+    <script defer
+        src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js "></script>
     <!-- processed data entries-->
     <script src="data/processed_data/DataA/DA.js"></script> <!-- base_data-->
     <script src="data/processed_data/DataA/keys.js"></script> <!-- var = keys-->
@@ -28,7 +29,7 @@
     <script src="data/processed_data/DataA/scatter_dataset.js"></script> <!-- var = scatter_dataset-->
     <script src="data/processed_data/DataA/statistics.js"></script> <!-- var = statistics-->
     <script src="data/processed_data/DataA/jenksBounds.js"></script>
-    
+
 
 
 </head>
@@ -83,7 +84,7 @@
             <!-- Map -->
             <div id="mapDiv" style="flex-grow: 1;">
                 <div id="map">
-                    
+
                 </div>
             </div>
 
@@ -98,14 +99,16 @@
                 </div> -->
                 <!-- Radiobuttons, draw choroplethmap-->
                 <div class="card bg-primary">
-                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Choose one of the Attributes to visualize on map">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip"
+                        data-placement="bottom" title="Choose one of the Attributes to visualize on map">
                         Choropleth Map
                     </div>
                 </div>
                 <div id="checkbox_menu_choro" class="container my-3"></div>
                 <!-- Radiobuttons, draw Scatterplot-->
                 <div class="card bg-primary my-3">
-                    <div class="card-body card-body text-light text-center" data-toggle="tooltip" data-placement="bottom" title="Select two or more Attributes to generate scatterplots">
+                    <div class="card-body card-body text-light text-center" data-toggle="tooltip"
+                        data-placement="bottom" title="Select two or more Attributes to generate scatterplots">
                         Scatterplot
                     </div>
                 </div>
@@ -122,20 +125,22 @@
                     <div id="chatbox" class="container border rounded">
                         <div class="container-fluid" id="messages" style="height:300px">
                             <div id="highlights" class="my-1 text-start" style="width:250px">
-                                <b>Windenergie ist in den meisten Landkreisen die dominante erneuerbare Energieform:</b>  <br>
-                                In einem Großteil der Regionen macht Windenergie mehr als 50% <br>
-                                der erneuerbaren Energien aus – oft sogar über 70%
+                                <b>Wenige Landkreise mit ausgewogenem Verhältnis von PV und Windkraft:</b>
+                                <br>
+                                Es existieren nur wenige Fälle, in denen der Anteil beider Technologien etwa 50/50
+                                verteilt ist – die meisten Landkreise sind deutlich durch eine Technologie geprägt.
                                 <br>
                                 <br>
-                                <b>Photovoltaik ist regional unterschiedlich stark vertreten:</b> <br>
-                                In südlichen und besonders sonnenreichen Regionen ist der Anteil von PV höher <br>
-                                – in manchen Landkreisen übersteigt er 80% der erneuerbaren Erzeugung.
+                                <b>Starke Varianz der CO₂e-Emissionen unabhängig der Struktur der Erneuerbaren:</b>
+                                <br>
+                                Selbst bei identischen Anteilen von PV- und Windkraft zeigen Landkreise stark
+                                unterschiedliche CO₂e-Werte, was auf weitere emissionsrelevante Einflussfaktoren
+                                hindeutet, die im Datensatz nicht enthalten sind.
                                 <br>
                                 <br>
-                                <b>Kaum Regionen mit ausgewogener Verteilung:</b>
-                                Nur sehr wenige Landkreise haben einen annähernd gleichen Anteil 
-                                von PV und Wind 
-                                – die meisten sind deutlich von einer der beiden Technologien geprägt.
+                                <b>Photovoltaik dominanter in Landkreisen mit geringem CO₂e-Ausstoß:</b>
+                                In den unteren CO₂e-Perzentilen finden sich viele Landkreise mit Photovoltaikanteilen
+                                >70%, was auf eine tendenzielle (wenn auch nicht strenge) Umkehrbeziehung hinweist
                             </div>
                         </div>
                         <!-- <input class="rounded" id="userInput" type="text" placeholder="Type a message..."></input>

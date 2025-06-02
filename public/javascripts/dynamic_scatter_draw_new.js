@@ -155,12 +155,21 @@ function createChart(datasetObj) {
                         let point = scatter.getElementsAtEventForMode(event, 'nearest', {
                             intersect: true
                         }, true)
-                        let identifier = scatter_dataset.fullData.RS[point[0].index]
+                        //hardcoded indentifier!
+                        let identifier
+                        let key
+                        try{
+                            identifier = scatter_dataset.fullData.RS[point[0].index]
+                            key = 'RS'
+                        }
+                        catch(error){
+                            identifier = scatter_dataset.fullData.name[point[0].index]
+                            key = 'name'
+                        }
                         console.log(identifier)
 
                         for (let i = 0; i < base_data.features.length; i++) {
-
-                            if (identifier == base_data.features[i].properties.RS) {
+                            if (identifier == base_data.features[i].properties[key]) {
                                 // get a position value from feature
                                 let referenceFeature = base_data.features[i]
                                 let pos 
